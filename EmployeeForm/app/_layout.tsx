@@ -8,12 +8,12 @@ export default function RootLayout() {
 
       {/* Sign Up screen */}
       <Stack.Screen
-        name="SignUp"
+        name="SignUpScreen"
         options={{
-          title: "Create Account",
+          title: "SignUp",
         }}
       />
-      <Stack.Screen name="screen/SignUpScreen" options={{ title: "Create Account" }} />
+      <Stack.Screen name="sign-in" options={{ title: "SignIn" }} />
     </Stack>
   );
 }
