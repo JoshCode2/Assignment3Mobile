@@ -4,6 +4,7 @@ import { useState } from "react";
 import {
     ActivityIndicator,
     Alert,
+    Button,
     KeyboardAvoidingView,
     Platform,
     Pressable,
@@ -14,6 +15,7 @@ import {
     View,
 } from "react-native";
 import * as Yup from "yup";
+import { router } from "expo-router";
 
 const signInSchema = Yup.object().shape({
   email: Yup.string()
@@ -30,21 +32,26 @@ export default function SignInScreen() {
 
   return (
     <SafeAreaView style={styles.safeArea}>
-      <KeyboardAvoidingView
-        style={styles.container}
-        behavior={Platform.OS === "ios" ? "padding" : undefined}
-      >
-        <View style={styles.header}>
-          <View style={styles.iconContainer}>
-            <Ionicons name="person-circle-outline" size={58} color="#2563EB" />
-          </View>
+  <KeyboardAvoidingView
+    style={styles.container}
+    behavior={Platform.OS === "ios" ? "padding" : undefined}
+  >
+    <View style={styles.header}>
+      <Pressable style={styles.backButton} onPress={() => router.back()}>
+        <Ionicons name="arrow-back" size={24} color="#334155" />
+      </Pressable>
 
-          <Text style={styles.title}>Welcome Back</Text>
+      <View style={styles.iconContainer}>
+        <Ionicons name="person-circle-outline" size={58} color="#2563EB" />
+      </View>
 
-          <Text style={styles.subtitle}>
-            Sign in to continue to the employee portal
-          </Text>
-        </View>
+      <Text style={styles.title}>Welcome Back</Text>
+      <Text style={styles.subtitle}>
+        Sign in to continue to the employee portal
+      </Text>
+    </View>
+
+    {/* rest unchanged */}
 
         <Formik
           initialValues={{
@@ -243,6 +250,13 @@ const styles = StyleSheet.create({
     marginBottom: 28,
   },
 
+  backButton: {
+  position: "absolute",
+  top: 0,
+  left: 0,
+  padding: 8,
+  zIndex: 1,
+},
   iconContainer: {
     width: 84,
     height: 84,

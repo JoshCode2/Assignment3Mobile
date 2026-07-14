@@ -13,6 +13,7 @@ export default function RootLayout() {
           title: "Create Account",
         }}
       />
+      <Stack.Screen name="screen/SignUpScreen" options={{ title: "Create Account" }} />
     </Stack>
   );
 }

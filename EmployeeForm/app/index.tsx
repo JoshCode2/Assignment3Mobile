@@ -1,8 +1,9 @@
 import React from 'react';
-import { StyleSheet, TextInput, Button, Alert, Text } from 'react-native';
+import { StyleSheet, TextInput, Alert, Text, Pressable, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
+import { router } from 'expo-router';
 
 const employeeSchema = Yup.object().shape({
   employeeId: Yup.string()
@@ -30,6 +31,24 @@ const employeeSchema = Yup.object().shape({
 export default function HomeScreen() {
   return (
     <SafeAreaView style={styles.container}>
+      <View style={styles.navRow}>
+        <Pressable
+          style={[styles.navButton, styles.signInButton]}
+          onPress={() => router.push('/sign-in')}
+        >
+          <Text style={styles.navButtonText}>Sign In</Text>
+        </Pressable>
+
+        <Pressable
+          style={[styles.navButton, styles.signUpButton]}
+          onPress={() => router.push('/SignUpScreen')}
+        >
+          <Text style={styles.navButtonText}>Sign Up</Text>
+        </Pressable>
+      </View>
+
+      <Text style={styles.heading}>Employee Form</Text>
+
       <Formik
         initialValues={{
           employeeId: '',
@@ -113,11 +132,13 @@ export default function HomeScreen() {
               <Text style={styles.error}>{errors.phone}</Text>
             )}
 
-            <Button
-              title="Submit"
+            <Pressable
+              style={[styles.submitButton, !isValid && styles.submitButtonDisabled]}
               onPress={() => handleSubmit()}
               disabled={!isValid}
-            />
+            >
+              <Text style={styles.submitButtonText}>Submit</Text>
+            </Pressable>
           </>
         )}
       </Formik>
@@ -141,5 +162,50 @@ const styles = StyleSheet.create({
   error: {
     color: 'red',
     marginBottom: 10,
+  },
+  navRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    gap: 10,
+    marginBottom: 24,
+  },
+  navButton: {
+    flex: 1,
+    paddingVertical: 12,
+    borderRadius: 10,
+    alignItems: 'center',
+  },
+  signInButton: {
+    backgroundColor: '#2563EB',
+  },
+  signUpButton: {
+    backgroundColor: '#16A34A',
+  },
+  navButtonText: {
+    color: '#FFFFFF',
+    fontSize: 15,
+    fontWeight: '600',
+  },
+  heading: {
+    fontSize: 22,
+    fontWeight: '700',
+    color: '#0F172A',
+    marginBottom: 16,
+    textAlign: 'center',
+  },
+  submitButton: {
+    backgroundColor: '#2563EB',
+    borderRadius: 10,
+    paddingVertical: 14,
+    alignItems: 'center',
+    marginTop: 8,
+  },
+  submitButtonDisabled: {
+    backgroundColor: '#93C5FD',
+  },
+  submitButtonText: {
+    color: '#FFFFFF',
+    fontSize: 16,
+    fontWeight: '700',
   },
 });
