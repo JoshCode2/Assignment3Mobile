@@ -6,7 +6,7 @@
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
     "scheme": "employeeform",
-    "userInterfaceStyle": "automatic",
+    "userInterfaceStyledir": "automatic",
     "ios": {
       "icon": "./assets/expo.icon"
     },
